@@ -17,7 +17,7 @@ class Audit(commands.Cog):
                 channel = self.bot.get_channel(int(getenv('LOG_CHANNEL')))
 
                 async for entry in after.guild.audit_logs(limit=1):
-                    await channel.send(f'{entry.user} change roles to {entry.target}')
+                    await channel.send(f'```fix\n{entry.user} change roles to {entry.target}\n```')
             except Exception as ex:
                 print(ex)
 
