@@ -16,9 +16,10 @@ class Audit(commands.Cog):
             try:
                 channel = self.bot.get_channel(int(getenv('LOG_CHANNEL')))
 
+                diff_roles = set(after.roles).symmetric_difference(set(before.roles))
+
                 async for entry in after.guild.audit_logs(limit=1):
-                    await channel.send(f'```fix\n{entry.user} change roles to {entry.target}\n```')
+                    await channel.send(f'```fix\n{entry.user} add {[role.name for role in diff_roles]} roles to {entry.target}\n```')
             except Exception as ex:
                 print(ex)
-
 
